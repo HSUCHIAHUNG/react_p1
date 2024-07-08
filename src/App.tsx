@@ -1,6 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect } from "react";
 import "./App.css";
 // router
 import Routes from "./router";
@@ -8,29 +6,36 @@ import Routes from "./router";
 function App() {
   const [count, setCount] = useState(0);
 
+  const initNumber = 0
+
+  function StateFn () {
+  
+    const arr = [ initNumber, stateHandler ]
+
+    function stateHandler (nextState: number) {
+      arr[0] = nextState
+    }
+
+    return arr;
+  }
+
+  const [ number, serNumber ] = StateFn();
+  StateFn()
+  console.log(number) 
+
+
+
+  const countHandle = () => {
+    setCount((previousState) => previousState + 1);
+    console.log(`${count} 已执行的函数`);
+  };
+
   return (
     <>
       <Routes />
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button onClick={countHandle}>count is {count}</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
